@@ -5,12 +5,11 @@ class GetUserModel {
 
   GetUserModel({this.userModel});
 
-  factory GetUserModel.fromJson(
-      Map<String, dynamic> json) {
+  factory GetUserModel.fromJson(Map<String, dynamic> json) {
     return GetUserModel(
       userModel: json['user'] == null
           ? null
-          : User.fromJson( json['user'] as Map<String, dynamic>),
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
   }
 
@@ -18,5 +17,10 @@ class GetUserModel {
     return {
       'user': userModel?.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return 'GetUserModel(userModel: $userModel)';
   }
 }

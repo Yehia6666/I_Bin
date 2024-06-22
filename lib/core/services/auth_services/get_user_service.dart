@@ -29,13 +29,15 @@ class GetUserServices {
       if (response.statusCode == 200) {
         var userData = response.data as Map<String, dynamic>;
         log('Response Data: $userData');
+        print(userData);
         return userData;
+
       } else {
         throw Exception('Failed to login: ${response.statusMessage}');
       }
     } catch (e) {
       log('Error in getUserServices: $e');
-      throw Exception('Error fetching user data');
+      //throw Exception('Error fetching user data');
     }
   }
 }

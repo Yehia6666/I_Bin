@@ -7,7 +7,6 @@ import 'package:i_bin1/core/functions/defualt_snack_bar.dart';
 import 'package:i_bin1/data/model/get_user_model_service/get_user_model.dart';
 import 'package:i_bin1/pages/user/articale_page/article_page.dart';
 import 'package:i_bin1/pages/user/notification_page/notifications_page.dart';
-import 'package:i_bin1/pages/user/articale_page/artical_card.dart';
 import 'package:i_bin1/shared/componants/constant/color.dart';
 import 'package:i_bin1/shared/componants/defoualt_image.dart';
 import 'package:i_bin1/pages/user/home_user_page/defoult_user_card.dart';
@@ -45,9 +44,7 @@ class _HomeUserPageState extends State<HomeUserPage> {
     super.initState();
     // Initialize data when the widget is created
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<GetUserCubit>(context).getUser(
-        getUserModel!,
-      );
+      BlocProvider.of<GetUserCubit>(context).getUser(getUserModel!);
     });
   }
 
@@ -74,6 +71,7 @@ class _HomeUserPageState extends State<HomeUserPage> {
         });
 
         log('dataaaaaaaaaaaaaa is $getUserModel');
+        Navigator.pop(context); // Close the loading dialog
       } else if (state is GetUserFailure) {
         Navigator.pop(context);
         showSnackBarFailur(context, 'Get User Date');
@@ -311,97 +309,78 @@ class _HomeUserPageState extends State<HomeUserPage> {
                         Padding(
                           padding: EdgeInsets.only(left: 16.w),
                           child:
-                              DefoualtImage('assets/images/Discover_Icon.svg'),
+                              DefoualtImage('assets/images/user_donation.png'),
                         ),
                         SizedBox(
-                          width: 8.w,
+                          width: 16.w,
                         ),
                         Text(
-                          'Discover',
+                          'All Donations',
                           style: TextStyle(
                             color: AppColor.kTitleColor,
-                            fontSize: 18.sp,
+                            fontSize: 14.sp,
                             fontFamily: 'Readex',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 14.w),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: Row(
-                            children: [
-                              DefualtUserCard(
-                                  'Collect money by separating garbage, Check your ranking now',
-                                  'Points Board',
-                                  'assets/images/Slider_Illustration_1.svg'),
-                              SizedBox(
-                                width: 16.w,
-                              ),
-                              DefualtUserCard(
-                                  'Order a truck to dispose of your garbage in an easy and safe way without any fees',
-                                  'Points Board',
-                                  'assets/images/Slider_Illustration_2.svg'),
-                              SizedBox(
-                                width: 16.w,
-                              ),
-                              DefualtUserCard(
-                                  'Be a volunteer with us,Help those people who need your donations',
-                                  'Points Board',
-                                  'assets/images/Slider_Illustration_3.svg'),
-                            ],
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isSelectedDonations = !isSelectedDonations;
+                            });
+                          },
+                          icon: Icon(
+                            isSelectedDonations
+                                ? Icons.keyboard_arrow_down
+                                : Icons.keyboard_arrow_up,
+                            size: 18.sp,
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.only(left: 14.w, right: 14.w, bottom: 8.h),
-                      child: Row(
-                        children: [
-                          DefoualtImage('assets/images/Article_Icon.svg'),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Text(
-                            'Articles',
-                            style: TextStyle(
-                              color: AppColor.kTitleColor,
-                              fontSize: 18.sp,
-                              fontFamily: 'Readex',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Spacer(
-                            flex: 1,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, ArticlesPage.id);
-                            },
-                            child: Text(
-                              'View More',
-                              style: TextStyle(
-                                color: const Color(0xFF03B04E),
-                                fontSize: 12.sp,
-                                fontFamily: 'Readex',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                    isSelectedDonations
+                        ? const Text('data')
+                        : const SizedBox(),
+                    SizedBox(
+                      height: 16.h,
                     ),
-                    ArticalCard(
-                      imageUrl: 'assets/images/Article_Illistration_1.svg',
-                      descriptionText:
-                          'This text is an example of a text that can be replaced in the same space',
-                      titleText: 'Learn how to reuse your garbage',
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 16.w),
+                          child: DefoualtImage(
+                              'assets/images/pick_from_user.png'),
+                        ),
+                        SizedBox(
+                          width: 16.w,
+                        ),
+                        Text(
+                          'All Pick Up',
+                          style: TextStyle(
+                            color: AppColor.kTitleColor,
+                            fontSize: 14.sp,
+                            fontFamily: 'Readex',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isSelectedPick = !isSelectedPick;
+                            });
+                          },
+                          icon: Icon(
+                            isSelectedPick
+                                ? Icons.keyboard_arrow_down
+                                : Icons.keyboard_arrow_up,
+                            size: 18.sp,
+                          ),
+                        ),
+                      ],
                     ),
+                    isSelectedPick ? const Text('data') : const SizedBox(),
                   ],
                 ),
         ),

@@ -102,7 +102,13 @@ class User {
       'media': media,
     };
   }
+
+  @override
+  String toString() {
+    return 'User{id: $id, name: $name, email: $email, emailVerifiedAt: $emailVerifiedAt, otp: $otp, twoFactorConfirmedAt: $twoFactorConfirmedAt, currentTeamId: $currentTeamId, profilePhotoPath: $profilePhotoPath, createdAt: $createdAt, updatedAt: $updatedAt, provider: $provider, providerId: $providerId, deletedAt: $deletedAt, isProvider: $isProvider, mobile: $mobile, address: $address, profilePhotoUrl: $profilePhotoUrl, profileImage: $profileImage, totalOrdersPoints: $totalOrdersPoints, totalOrderItemsKg: $totalOrderItemsKg, media: $media}';
+  }
 }
+
 class UserToken {
   String? token;
 
@@ -116,6 +122,11 @@ class UserToken {
     return {
       'access_token': token,
     };
+  }
+
+  @override
+  String toString() {
+    return 'UserToken{token: $token}';
   }
 }
 
@@ -136,5 +147,10 @@ class GetUserToken {
     return {
       'access_token': userToken?.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return 'GetUserToken{userToken: $userToken}';
   }
 }

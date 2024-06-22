@@ -1,7 +1,9 @@
 
+import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:i_bin1/Test.dart';
+import 'package:i_bin1/core/services/auth_services/get_user_service.dart';
 import 'package:i_bin1/core/services/services.dart';
 import 'package:i_bin1/helper/local_shared_preferences.dart';
 import 'package:i_bin1/pages/onbording/loadingPage.dart';
@@ -42,9 +44,8 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-//   await initialServices();
-//   await CacheNetwork.cacheInitalization() ;
-//  token  =  CacheNetwork.getCacheData(key: "token") ;
+   GetUserServices(Dio()).getUserServices();
+
   runApp(I_Bin());
 }
 

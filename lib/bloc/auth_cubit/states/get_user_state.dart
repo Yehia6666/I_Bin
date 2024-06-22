@@ -12,7 +12,7 @@ class GetUserLoading extends GetUserState {}
 
 class GetUserSuccess extends GetUserState {
 
-  final User user;
+   final User user;
 
   GetUserSuccess({required this.user});
 
